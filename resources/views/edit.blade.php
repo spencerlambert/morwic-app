@@ -96,3 +96,4 @@ $('.datepicker').datepicker({
     startDate: '-3d'
 });
 </script>
+@endsection

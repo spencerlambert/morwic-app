@@ -13,7 +13,7 @@ class PropertyItemNameFieldToAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::table('asset', function (Blueprint $table) {
+        Schema::table('assets', function (Blueprint $table) {
            $table->string("property_item_name");
             $table->string("item_location");
             $table->string("serial_number");
@@ -30,7 +30,7 @@ class PropertyItemNameFieldToAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::table('asset', function (Blueprint $table) {
+        Schema::table('assets', function (Blueprint $table) {
              $table->dropColumn(['property_item_name', 'item_location', 'serial_number', 'make_model', 'notes', 'upload_image_property_receipts']);
         });
     }
