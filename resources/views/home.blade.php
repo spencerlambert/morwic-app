@@ -2,10 +2,16 @@
 
 @section('content')
 <div class="container">
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+      <button type="button" class="close" data-dismiss="alert">×</button> 
+      <strong>{{ $message }}</strong>
+      </div>
+    @endif
     <div class="row justify-content-center">
-            <div id="His" class="col-md-4">
+    <div id="His" class="col-md-4">
               <h3> His Assests </h3>
-              @if(isset($his_assets))
+           @if(isset($his_assets))
               @foreach($his_assets as $his_asset)
               <div class="row">
                 <div class="col-md-12">

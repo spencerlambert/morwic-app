@@ -22,7 +22,8 @@ Route::get('/create', 'HomeController@create')->name('create');
 Route::post('/store', 'HomeController@store')->name('store');
 Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
 Route::post('/destroy/{id}', 'HomeController@destroy')->name('destroy');
-Route::post('/update/{id}', 'HomeController@update')->name('update');
+Route::put('/update/{id}', 'HomeController@update')->name('update');
+//Route::post('/update/{id}', 'HomeController@update');
 // Route::get('my-datatables', 'MyDatatablesController@index');
 //
 // Route::get('get-data-my-datatables', ['as'=>'get.data','uses'=>'MyDatatablesController@getData']);

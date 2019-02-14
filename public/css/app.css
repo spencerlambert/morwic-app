@@ -3496,6 +3496,10 @@ pre code {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+.form-control-files{
+	border:0px;
+	padding: 0px;
+}
 
 @media screen and (prefers-reduced-motion: reduce) {
   .form-control {

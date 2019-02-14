@@ -13,19 +13,15 @@ class CreateTableAssets extends Migration
      */
     public function up()
     {
-        Schema::create('assets', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->string('image_url');
-            $table->string('accured_date');
-            $table->float('present_value');
-            $table->float('accured_value');
-            $table->enum('ownership',['his','her','community']);
-            $table->boolean('purchased_prior_marriage');
-            $table->timestamps();
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
+            Schema::table('assets', function (Blueprint $table) {
+            
+            $table->string('property_item_name');
+            $table->string('item_location');
+            $table->string('serial_number');
+            $table->string('make_model');
+            $table->string('notes');
+            $table->string('upload_image_property_receipts');
+            
         });
     }
 

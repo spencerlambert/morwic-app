@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Asset;
+use DB;
 
 class HomeController extends Controller
 {
@@ -25,9 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $id = \Auth::user()->id;
-        $his_assets = Asset::where(['user_id'=>$id,'ownership'=> 'his'])->paginate(1);
-        $her_assets = Asset::where(['user_id'=>$id,'ownership'=> 'her'])->paginate(1);
-        $community_assets = Asset::where(['user_id'=>$id,'ownership'=> 'community'])->paginate(1);
+        $his_assets = Asset::where(['user_id'=>$id,'ownership'=> 'his'])->orderBy('id', 'Desc')->paginate(1);
+        $her_assets = Asset::where(['user_id'=>$id,'ownership'=> 'her'])->orderBy('id', 'Desc')->paginate(1);
+        $community_assets = Asset::where(['user_id'=>$id,'ownership'=> 'community'])->orderBy('id', 'Desc')->paginate(1);
         return view('home',[ 'his_assets' => $his_assets, 'her_assets' => $her_assets, 'community_assets' => $community_assets]);
     }
     /**
@@ -69,21 +70,89 @@ class HomeController extends Controller
       'accured_value' => 'numeric',
       'ownership'=> 'required|alpha',
       'purchased_prior_marriage'=> 'required|boolean',
+      'property_item_name' => 'required',
+      'item_location' => 'required',
+      'serial_number' => 'required',
+      'make_model' => 'required',
+      'upload_image_property_receipts' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
       ]);
-      $id = \Auth::user()->id;
-
-      $asset = new Asset([
-      'user_id' => $id,
-      'image_url' => $request->get('image_url'),
-      'accured_date'=>$request->get('accured_date'),
-      'present_value'=> $request->get('present_value'),
-      'accured_value' => $request->get('accured_value'),
-      'ownership'=> $request->get('ownership'),
-      'purchased_prior_marriage'=> $request->get('purchased_prior_marriage'),
-      ]);
+      $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
+        request()->upload_image_property_receipts->move(public_path('images'), $imageName);
+      //$id = \Auth::user()->id;
+        
+      if(!file_exists(public_path('images'))){
+         chmod(public_path('images')."/".$imageName, 0755);
+      }
+      $asset = new Asset;
+      $asset->user_id = auth()->user()->id;
+      $asset->image_url = $request->get('image_url');
+      $asset->accured_date = $request->get('accured_date');
+      $asset->present_value = $request->get('present_value');
+      $asset->accured_value = $request->get('accured_value');
+      $asset->ownership = $request->get('ownership');
+      $asset->purchased_prior_marriage = $request->get('purchased_prior_marriage');
+      $asset->property_item_name = $request->get('property_item_name');
+      $asset->item_location = $request->get('item_location');
+      $asset->serial_number = $request->get('serial_number');
+      $asset->make_model = $request->get('make_model');
+      $asset->notes = $request->get('notes');
+      $asset->upload_image_property_receipts = $imageName;
       $asset->save();
-      return redirect('/home')->with('success', 'asset has been added');
+      return redirect('/home')->with('success', 'Asset has been added');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,$id)
+    {
+     
+      $request->validate([
+      'image_url'=>'required',
+      'accured_date'=>'required',
+      'present_value'=> 'numeric',
+      'accured_value' => 'numeric',
+      'ownership'=> 'required|alpha',
+      'purchased_prior_marriage'=> 'required|boolean',
+      'property_item_name' => 'required',
+      'item_location' => 'required',
+      'serial_number' => 'required',
+      'make_model' => 'required',
+      ]);
+           
+      $asset = Asset::find($id);
+      $asset->image_url = $request->input('image_url');
+      $asset->property_item_name = $request->input('property_item_name');
+      $asset->accured_date = $request->input('accured_date');
+      $asset->present_value = $request->input('present_value');
+      $asset->accured_value = $request->input('accured_value');
+      $asset->ownership = $request->input('ownership');
+      $asset->purchased_prior_marriage = $request->input('purchased_prior_marriage');
+      $asset->item_location = $request->input('item_location');
+      $asset->serial_number = $request->input('serial_number');
+      $asset->make_model = $request->input('make_model');
+      $asset->notes = $request->input('notes');
+       if($request->has('upload_image_property_receipts')){
+        $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
+        request()->upload_image_property_receipts->move(public_path('images'), $imageName);
+      //$id = \Auth::user()->id;
+        
+        if(!file_exists(public_path('images'))){
+          chmod(public_path('images')."/".$imageName, 0755);
+      }
+      $asset->upload_image_property_receipts = $imageName;
+    }
+      
+      $asset->save();
+          
+      return redirect('/home')->with('success', 'Stock has been updated');
+    }
+
+    
 
 }
