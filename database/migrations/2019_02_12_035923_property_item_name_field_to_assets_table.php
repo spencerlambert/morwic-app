@@ -20,6 +20,7 @@ class PropertyItemNameFieldToAssetsTable extends Migration
             $table->string("make_model");
             $table->string("notes");
             $table->string("upload_image_property_receipts");
+           
         });
     }
 

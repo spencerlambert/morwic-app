@@ -79,25 +79,23 @@ class HomeController extends Controller
       ]);
       $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);
-      //$id = \Auth::user()->id;
-        
-      if(!file_exists(public_path('images'))){
-         chmod(public_path('images')."/".$imageName, 0755);
-      }
-      $asset = new Asset;
-      $asset->user_id = auth()->user()->id;
-      $asset->image_url = $request->get('image_url');
-      $asset->accured_date = $request->get('accured_date');
-      $asset->present_value = $request->get('present_value');
-      $asset->accured_value = $request->get('accured_value');
-      $asset->ownership = $request->get('ownership');
-      $asset->purchased_prior_marriage = $request->get('purchased_prior_marriage');
-      $asset->property_item_name = $request->get('property_item_name');
-      $asset->item_location = $request->get('item_location');
-      $asset->serial_number = $request->get('serial_number');
-      $asset->make_model = $request->get('make_model');
-      $asset->notes = $request->get('notes');
-      $asset->upload_image_property_receipts = $imageName;
+
+      $id = \Auth::user()->id;
+      $asset = new Asset([
+      'user_id' => $id,
+      'image_url' => $request->get('image_url'),
+      'accured_date'=>$request->get('accured_date'),
+      'present_value'=> $request->get('present_value'),
+      'accured_value' => $request->get('accured_value'),
+      'ownership'=> $request->get('ownership'),
+      'purchased_prior_marriage'=> $request->get('purchased_prior_marriage'),
+      'property_item_name'=> $request->get('property_item_name'),
+      'item_location'=> $request->get('item_location'),
+      'serial_number'=> $request->get('serial_number'),
+      'make_model'=> $request->get('make_model'),
+      'notes'=> $request->get('notes'),
+      'upload_image_property_receipts'=> $imageName,
+      ]);
       $asset->save();
       return redirect('/home')->with('success', 'Asset has been added');
     }
@@ -141,16 +139,26 @@ class HomeController extends Controller
         $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);
       //$id = \Auth::user()->id;
-        
-        if(!file_exists(public_path('images'))){
-          chmod(public_path('images')."/".$imageName, 0755);
-      }
+     
       $asset->upload_image_property_receipts = $imageName;
     }
       
       $asset->save();
           
-      return redirect('/home')->with('success', 'Stock has been updated');
+      return redirect('/home')->with('success', 'Asset has been updated');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+      $assets = Asset::findOrFail($id);
+      $assets->delete();
+      return redirect('/home')->with('success', 'Asset has been deleted');
     }
 
     

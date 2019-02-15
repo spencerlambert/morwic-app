@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create', 'HomeController@create')->name('create');
 Route::post('/store', 'HomeController@store')->name('store');
 Route::get('/edit/{id}', 'HomeController@edit')->name('edit');
-Route::post('/destroy/{id}', 'HomeController@destroy')->name('destroy');
+Route::DELETE('/destroy/{id}', 'HomeController@destroy')->name('destroy');
 Route::put('/update/{id}', 'HomeController@update')->name('update');
 //Route::post('/update/{id}', 'HomeController@update');
 // Route::get('my-datatables', 'MyDatatablesController@index');

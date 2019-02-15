@@ -25,7 +25,7 @@
                   <form action="{{ route('destroy', $his_asset->id)}}" method="post"  style="float:right;">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                   </form>
             </td>
                 </div>
@@ -53,7 +53,7 @@
                   <form action="{{ route('destroy', $her_asset->id)}}" method="post" style="float:right;">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete the asset?')">Delete</button>
                   </form>
                 </div>
               </div>
@@ -80,7 +80,7 @@
                   <form action="{{ route('destroy', $community_asset->id)}}" method="post" style="float:right;">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                   </form>
                 </div>
               </div>

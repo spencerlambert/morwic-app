@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
               <label for="price">Date Of Purchase *</label>
-              <input type="text" class="form-control datepicker" name="accured_date" value="{{ old('accured_date') }}"/>
+              <input type="text" class="form-control datepicker" name="accured_date" value="{{ old('accured_date') }}" required/>
           </div>
          <div class="form-group">
               <label for="quantity">Item Location *</label>
@@ -69,11 +69,11 @@
           </div>
           <div class="form-group">
               <label for="price">Value Of The Property When Bought? *</label>
-              <input type="text" class="form-control" name="accured_value" placeholder="Your Answer" value="{{ old('accured_value') }}"/>
+              <input type="text" class="form-control" name="accured_value" placeholder="Your Answer" value="{{ old('accured_value') }}" required/>
           </div>
           <div class="form-group">
               <label for="quantity">Value Of The Property Now? *</label>
-              <input type="text" class="form-control" name="present_value" placeholder="Your Answer" value="{{ old('present_value') }}"/>
+              <input type="text" class="form-control" name="present_value" placeholder="Your Answer" value="{{ old('present_value') }}" required/>
           </div>
           
            <div class="form-group">
