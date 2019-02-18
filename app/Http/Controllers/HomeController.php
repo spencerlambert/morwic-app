@@ -95,13 +95,13 @@ class HomeController extends Controller
       'make_model'=> $request->get('make_model'),
       'notes'=> $request->get('notes'),
       'upload_image_property_receipts'=> $imageName,
-      'other_ownership'=> $request->get('other_ownership'),
+      //'other_ownership'=> $request->get('other_ownership'),
       ]);
       $asset->save();
 
-      DB::statement("ALTER TABLE assets MODIFY COLUMN ownership ENUM('his', 'her', 'community','other')");
-      DB::statement("ALTER TABLE assets ADD COLUMN other_ownership varchar(199)");
-      DB::statement("ALTER TABLE assets DROP image_url ");
+      //DB::statement("ALTER TABLE assets MODIFY COLUMN ownership ENUM('his', 'her', 'community','other')");
+      //DB::statement("ALTER TABLE assets ADD COLUMN other_ownership");
+      //DB::statement("ALTER TABLE assets DROP image_url ");
       
        
       return redirect('/home')->with('success', 'Asset has been added');
@@ -141,7 +141,7 @@ class HomeController extends Controller
       $asset->serial_number = $request->input('serial_number');
       $asset->make_model = $request->input('make_model');
       $asset->notes = $request->input('notes');
-      $asset->other_ownership = $request->input('other_ownership');
+      //$asset->other_ownership = $request->input('other_ownership');
        if($request->has('upload_image_property_receipts')){
         $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);
