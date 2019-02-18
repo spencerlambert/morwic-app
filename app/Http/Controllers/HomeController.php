@@ -100,6 +100,10 @@ class HomeController extends Controller
       $asset->save();
 
       DB::statement("ALTER TABLE assets MODIFY COLUMN ownership ENUM('his', 'her', 'community','other')");
+      DB::statement("ALTER TABLE assets ADD COLUMN other_ownership varchar(199)");
+      DB::statement("ALTER TABLE assets DROP image_url ");
+      
+       
       return redirect('/home')->with('success', 'Asset has been added');
     }
 
