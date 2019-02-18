@@ -14,7 +14,7 @@ class Asset extends Model
    * @var array
    */
   protected $fillable = [
-    'user_id', 'image_url','accured_date', 'present_value','accured_value', 'ownership', 'purchased_prior_marriage', 'property_item_name', 'item_location', 'serial_number' ,'make_model', 'notes','upload_image_property_receipts','other_ownership'
+    'user_id','accured_date', 'present_value','accured_value', 'ownership', 'purchased_prior_marriage', 'property_item_name', 'item_location', 'serial_number' ,'make_model', 'notes','upload_image_property_receipts','other_ownership'
   ];
 
 }

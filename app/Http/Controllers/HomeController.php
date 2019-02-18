@@ -64,11 +64,11 @@ class HomeController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-      'image_url'=>'required',
+      //'image_url'=>'required',
       'accured_date'=>'required',
       'present_value'=> 'numeric',
       'accured_value' => 'numeric',
-      'ownership'=> 'required|alpha',
+      //'ownership'=> 'required|alpha',
       'purchased_prior_marriage'=> 'required|boolean',
       'property_item_name' => 'required',
       'item_location' => 'required',
@@ -79,11 +79,11 @@ class HomeController extends Controller
       ]);
       $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);
-
+        
       $id = \Auth::user()->id;
       $asset = new Asset([
       'user_id' => $id,
-      'image_url' => $request->get('image_url'),
+      //'image_url' => $request->get('image_url'),
       'accured_date'=>$request->get('accured_date'),
       'present_value'=> $request->get('present_value'),
       'accured_value' => $request->get('accured_value'),
@@ -95,8 +95,11 @@ class HomeController extends Controller
       'make_model'=> $request->get('make_model'),
       'notes'=> $request->get('notes'),
       'upload_image_property_receipts'=> $imageName,
+      'other_ownership'=> $request->get('other_ownership'),
       ]);
       $asset->save();
+
+      DB::statement("ALTER TABLE assets MODIFY COLUMN ownership ENUM('his', 'her', 'community','other')");
       return redirect('/home')->with('success', 'Asset has been added');
     }
 
@@ -111,11 +114,11 @@ class HomeController extends Controller
     {
      
       $request->validate([
-      'image_url'=>'required',
+      
       'accured_date'=>'required',
       'present_value'=> 'numeric',
       'accured_value' => 'numeric',
-      'ownership'=> 'required|alpha',
+      //'ownership'=> 'required|alpha',
       'purchased_prior_marriage'=> 'required|boolean',
       'property_item_name' => 'required',
       'item_location' => 'required',
@@ -124,7 +127,6 @@ class HomeController extends Controller
       ]);
            
       $asset = Asset::find($id);
-      $asset->image_url = $request->input('image_url');
       $asset->property_item_name = $request->input('property_item_name');
       $asset->accured_date = $request->input('accured_date');
       $asset->present_value = $request->input('present_value');
@@ -135,6 +137,7 @@ class HomeController extends Controller
       $asset->serial_number = $request->input('serial_number');
       $asset->make_model = $request->input('make_model');
       $asset->notes = $request->input('notes');
+      $asset->other_ownership = $request->input('other_ownership');
        if($request->has('upload_image_property_receipts')){
         $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);

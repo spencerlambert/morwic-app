@@ -25,12 +25,9 @@
       </div><br />
     @endif
       <form method="post" action="{{ route('store') }}" enctype="multipart/form-data">
+          
           <div class="form-group">
-              @csrf
-              <label for="name">Image URL *</label>
-              <input type="text" class="form-control" name="image_url" placeholder="Your Answer" required value="{{ old('image_url') }}"/>
-          </div>
-          <div class="form-group">
+           @csrf
               <label for="quantity">Property Item Name *</label>
               <input type="text" class="form-control" name="property_item_name" placeholder="Your Answer" required value="{{ old('property_item_name') }}"/>
           </div>
@@ -62,10 +59,13 @@
           <div class="form-group">
               <label for="price">Who Owns The Property *</label>
               <select class="form-control" name="ownership" required />
+                <option value="other" >Select Ownership</option>
                   <option value="his" >His</option>
                   <option value="her" >Her</option>
                   <option value="community">Community Property</option>
               </select>
+              <br>
+              <input type="text" class="form-control" name="other_ownership" placeholder="Other"  value="{{ old('other_ownership') }}"/>
           </div>
           <div class="form-group">
               <label for="price">Value Of The Property When Bought? *</label>

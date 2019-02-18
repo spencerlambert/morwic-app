@@ -43,6 +43,10 @@ return [
 
     'disks' => [
 
+        'addassets' => [
+            'driver' => 'local',
+            'root' => public_path('upload'),
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

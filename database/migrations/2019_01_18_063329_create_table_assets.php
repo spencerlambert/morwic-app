@@ -32,6 +32,6 @@ class CreateTableAssets extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_assets');
+        //Schema::dropIfExists('table_assets');
     }
 }

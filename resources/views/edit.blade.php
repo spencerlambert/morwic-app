@@ -24,11 +24,7 @@
       <form method="post" action="{{ route('update', $asset->id) }}" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PUT">
      {{ csrf_field() }}
-          <div class="form-group">
-             
-              <label for="name">Image URL *</label>
-              <input type="text" class="form-control" name="image_url" placeholder="Your Answer" required value="{{ $asset->image_url }}"/>
-          </div>
+         
           <div class="form-group">
               <label for="quantity">Property Item Name *</label>
               <input type="text" class="form-control" name="property_item_name" placeholder="Your Answer" required value="{{ $asset->property_item_name }}"/>
@@ -68,6 +64,8 @@
                   <option value="her" @if($asset->ownership=='her') selected @else  @endif value="her" >Her</option>
                   <option value="community" @if($asset->ownership=='community') selected @else  @endif >Community Property</option>
               </select>
+              <br>
+              <input type="text" class="form-control" name="other_ownership" placeholder="Other"  value="{{ $asset->other_ownership }}"/>
           </div>
           <div class="form-group">
               <label for="price">Value Of The Property When Bought? *</label>
