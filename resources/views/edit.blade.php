@@ -60,6 +60,7 @@
           <div class="form-group">
               <label for="price">Who Owns The Property *</label>
               <select class="form-control" name="ownership" required />
+                 <option value="other" @if($asset->ownership=='other') selected @else  @endif >Select Ownership</option>
                   <option value="his" @if($asset->ownership=='his') selected @else  @endif value="his" >His</option>
                   <option value="her" @if($asset->ownership=='her') selected @else  @endif value="her" >Her</option>
                   <option value="community" @if($asset->ownership=='community') selected @else  @endif >Community Property</option>

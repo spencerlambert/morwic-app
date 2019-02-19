@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Asset;
 use DB;
+use Image;
+
+
 
 class HomeController extends Controller
 {
@@ -78,8 +81,15 @@ class HomeController extends Controller
 
       ]);
       $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
-        request()->upload_image_property_receipts->move(public_path('images'), $imageName);
-        
+        $photo = request()->upload_image_property_receipts;
+        $destinationPath = public_path('/thumbnail_images'); 
+        $destinationPath_largeimage = public_path('/large_images'); 
+        $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
+        $thumb_img->save($destinationPath.'/'.$imageName );
+        $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
+        $large_img->save($destinationPath_largeimage.'/'.$imageName );
+        //$destinationPath = public_path('/normal_images');
+        //$photo->move($destinationPath, $imageName );
       $id = \Auth::user()->id;
       $asset = new Asset([
       'user_id' => $id,
@@ -95,15 +105,10 @@ class HomeController extends Controller
       'make_model'=> $request->get('make_model'),
       'notes'=> $request->get('notes'),
       'upload_image_property_receipts'=> $imageName,
-      //'other_ownership'=> $request->get('other_ownership'),
+      'other_ownership'=> $request->get('other_ownership'),
       ]);
       $asset->save();
 
-      //DB::statement("ALTER TABLE assets MODIFY COLUMN ownership ENUM('his', 'her', 'community','other')");
-      //DB::statement("ALTER TABLE assets ADD COLUMN other_ownership");
-      //DB::statement("ALTER TABLE assets DROP image_url ");
-      
-       
       return redirect('/home')->with('success', 'Asset has been added');
     }
 
@@ -141,7 +146,7 @@ class HomeController extends Controller
       $asset->serial_number = $request->input('serial_number');
       $asset->make_model = $request->input('make_model');
       $asset->notes = $request->input('notes');
-      //$asset->other_ownership = $request->input('other_ownership');
+      $asset->other_ownership = $request->input('other_ownership');
        if($request->has('upload_image_property_receipts')){
         $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
         request()->upload_image_property_receipts->move(public_path('images'), $imageName);
