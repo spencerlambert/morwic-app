@@ -148,10 +148,16 @@ class HomeController extends Controller
       $asset->notes = $request->input('notes');
       $asset->other_ownership = $request->input('other_ownership');
        if($request->has('upload_image_property_receipts')){
-        $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
-        request()->upload_image_property_receipts->move(public_path('images'), $imageName);
-      //$id = \Auth::user()->id;
-     
+      $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
+      $photo = request()->upload_image_property_receipts;
+        $destinationPath = public_path('/thumbnail_images'); 
+        $destinationPath_largeimage = public_path('/large_images'); 
+        $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
+        $thumb_img->save($destinationPath.'/'.$imageName );
+        $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
+        $large_img->save($destinationPath_largeimage.'/'.$imageName );
+        //request()->upload_image_property_receipts->move(public_path('images'), $imageName);
+           
       $asset->upload_image_property_receipts = $imageName;
     }
       
