@@ -49,7 +49,7 @@
               <label for="quantity">Upload Image Of Property And Receipts*</label>
               <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" placeholder="Your Answer" @if($asset->upload_image_property_receipts)  @else required @endif/>
               @if($asset->upload_image_property_receipts)
-                <img src="{{url('/').'/images/'.$asset->upload_image_property_receipts}}" style="width: 150px;height: 150px;"/>
+                <img src="{{url('/').'/thumbnail_images/'.$asset->upload_image_property_receipts}}" style="width: 150px;height: 150px;"/>
               @endif
           </div>
           <div class="form-group">

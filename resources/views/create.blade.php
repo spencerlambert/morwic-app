@@ -50,6 +50,8 @@
           <div class="form-group">
               <label for="quantity">Upload Image Of Property And Receipts*</label>
               <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" placeholder="Your Answer" required />
+              <br>
+               <input type="file" name="uploadedfile" accept="image/*" capture>  
           </div>
           <div class="form-group">
               <label for="price">Purchased Prior To Marriage * </label><br>

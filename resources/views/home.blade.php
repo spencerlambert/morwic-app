@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  <img src="{{$his_asset->image_url}}" class="img-thumbnail" alt="Cinque Terre"><br>
+                  <img src="{{url('/').'/thumbnail_images/'.$his_asset->upload_image_property_receipts}}" class="img-thumbnail" alt="Cinque Terre"><br>
                   accured_date:{{$his_asset->accured_date}}<br>
                   present_value:{{$his_asset->present_value}}<br>
                   accured_value:{{$his_asset->accured_value}}<br>
@@ -44,7 +44,7 @@
               <div class="row">
                 <div class="col-md-12">
 
-                  <img src="{{$her_asset->image_url}}" class="img-thumbnail" alt="Cinque Terre"><br>
+                  <img src="{{url('/').'/thumbnail_images/'.$her_asset->upload_image_property_receipts}}" class="img-thumbnail" alt="Cinque Terre"><br>
                   accured_date:{{$her_asset->accured_date}}<br>
                   present_value:{{$her_asset->present_value}}<br>
                   accured_value:{{$her_asset->accured_value}}<br>
@@ -71,7 +71,7 @@
               @foreach($community_assets as $community_asset)
               <div class="row">
                 <div class="col-md-12">
-                  <img src="{{$community_asset->image_url}}" class="img-thumbnail" alt="Cinque Terre"><br>
+                  <img src="{{url('/').'/thumbnail_images/'.$community_asset->upload_image_property_receipts}}" class="img-thumbnail" alt="Cinque Terre"><br>
                   accured_date:{{$community_asset->accured_date}}<br>
                   present_value:{{$community_asset->present_value}}<br>
                   accured_value:{{$community_asset->accured_value}}<br>
