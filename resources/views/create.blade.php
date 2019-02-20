@@ -78,11 +78,11 @@
           <div class="form-group">
               <label for="quantity">Upload Image Of Property And Receipts*</label>
               <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" placeholder="Your Answer" required />
-              <br>
-              @if (!isset( $_SERVER['HTTP_USER_AGENT'])))
+              <!--<br>
+              
             <input type="file" name="file" id="file" class="inputfile"  accept="image/*" capture> 
-               <label for="file">Choose a Photo</label> 
-               @endif
+               <label for="file">Choose a Photo</label> -->
+              
           </div>
           <div class="form-group">
               <label for="price">Purchased Prior To Marriage * </label><br>

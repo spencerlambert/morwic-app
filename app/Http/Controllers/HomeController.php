@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Asset;
 use DB;
 use Image;
+use Browser;
 
 
 

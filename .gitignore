@@ -2,7 +2,7 @@
 /public/hot
 
 /storage/*.key
-
+composer.json
 .env
 .phpunit.result.cache
 Homestead.json
