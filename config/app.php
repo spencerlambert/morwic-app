@@ -164,6 +164,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         
         
+        
 
         /*
          * Package Service Providers...
@@ -179,6 +180,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\AgentServiceProvider::class,
         
 
     ],
@@ -231,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Agent' => 'Jenssegers\Agent\Facades\Agent',
 
 
     ],

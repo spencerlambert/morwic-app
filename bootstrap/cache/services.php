@@ -31,11 +31,13 @@
     27 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     28 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     29 => 'Intervention\\Image\\ImageServiceProvider',
-    30 => 'Intervention\\Image\\ImageServiceProvider',
-    31 => 'App\\Providers\\AppServiceProvider',
-    32 => 'App\\Providers\\AuthServiceProvider',
-    33 => 'App\\Providers\\EventServiceProvider',
-    34 => 'App\\Providers\\RouteServiceProvider',
+    30 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    31 => 'Intervention\\Image\\ImageServiceProvider',
+    32 => 'App\\Providers\\AppServiceProvider',
+    33 => 'App\\Providers\\AuthServiceProvider',
+    34 => 'App\\Providers\\EventServiceProvider',
+    35 => 'App\\Providers\\RouteServiceProvider',
+    36 => 'App\\Providers\\AgentServiceProvider',
   ),
   'eager' => 
   array (
@@ -60,6 +62,7 @@
     18 => 'App\\Providers\\AuthServiceProvider',
     19 => 'App\\Providers\\EventServiceProvider',
     20 => 'App\\Providers\\RouteServiceProvider',
+    21 => 'App\\Providers\\AgentServiceProvider',
   ),
   'deferred' => 
   array (
@@ -166,6 +169,8 @@
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
     'NunoMaduro\\Collision\\Contracts\\Provider' => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    'agent' => 'Jenssegers\\Agent\\AgentServiceProvider',
+    'Jenssegers\\Agent\\Agent' => 'Jenssegers\\Agent\\AgentServiceProvider',
   ),
   'when' => 
   array (
@@ -209,6 +214,9 @@
     array (
     ),
     'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => 
+    array (
+    ),
+    'Jenssegers\\Agent\\AgentServiceProvider' => 
     array (
     ),
   ),
