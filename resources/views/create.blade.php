@@ -76,12 +76,12 @@
               <input type="text" class="form-control" name="make_model" placeholder="Your Answer" required value="{{ old('image_url') }}"/>
           </div>
           <div class="form-group">
-              <label for="quantity">Upload Image Of Property And Receipts*</label>
-              <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" placeholder="Your Answer" required />
-              @if ($agent->isMobile())
+              <!<label for="quantity">Upload Image Of Property And Receipts*</label>
+              <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" id="upload_image_property_receipts"  @if($agent->isDesktop()) required @endif/>
+               @if ($agent->isMobile())
              <br>
               
-            <input type="file" name="file" id="file" class="inputfile"  accept="image/*" capture> 
+            <input type="file" name="take_photo_phone" id="file" class="inputfile"  accept="image/*" capture> 
                <label for="file">Choose a Photo</label> 
            @endif
           <div class="form-group">
@@ -91,18 +91,18 @@
           </div>
           <div class="form-group">
               <label for="price">Who Owns The Property *</label>
-              <select class="form-control" name="ownership" required />
+              <select class="form-control" name="ownership" required   onchange="checkvalues(this)" />
                 <option value="other" >Select Ownership</option>
                   <option value="his" >His</option>
                   <option value="her" >Her</option>
                   <option value="community">Community Property</option>
               </select>
               <br>
-              <input type="text" class="form-control" name="other_ownership" placeholder="Other"  value="{{ old('other_ownership') }}"/>
+              <input type="text" class="form-control" name="other_ownership" placeholder="Other"  value="{{ old('other_ownership') }}" />
           </div>
           <div class="form-group">
               <label for="price">Value Of The Property When Bought? *</label>
-              <input type="text" class="form-control" name="accured_value" placeholder="Your Answer" value="{{ old('accured_value') }}" required/>
+              <input type="text" class="form-control" name="accured_value" placeholder="Your Answer" value="{{ old('accured_value') }}" required  onchange="checkvalues(this)" />
           </div>
           <div class="form-group">
               <label for="quantity">Value Of The Property Now? *</label>
@@ -126,5 +126,20 @@ $('.datepicker').datepicker({
     format: 'mm/dd/yyyy',
     startDate: '-3d'
 });
+function checkvalues(inputval) 
+   {
+     var upload_image_property_receipts=document.getElementById("upload_image_property_receipts").value
+     var take_photo_phone=document.getElementById("file").value
+     if (upload_image_property_receipts== 0 && take_photo_phone==0)
+      { 
+        inputval.value = "";
+
+         alert("Please select any options for upload property and receipts");    
+         return false; 
+      }   
+      return true; 
+    } 
+
+
 </script>
 @endsection

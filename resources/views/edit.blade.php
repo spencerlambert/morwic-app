@@ -6,6 +6,34 @@
   .uper {
     margin-top: 40px;
   }
+  .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #6cb2eb;
+    display: inline-block;
+    padding: 8px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #6cb2eb;
+}
+.inputfile + label {
+  cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
 </style>
 <div class="card uper">
   <div class="card-header">
@@ -47,7 +75,14 @@
           </div>
           <div class="form-group">
               <label for="quantity">Upload Image Of Property And Receipts*</label>
-              <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" placeholder="Your Answer" @if($asset->upload_image_property_receipts)  @else required @endif/>
+              <input type="file" class="form-control form-control-files" name="upload_image_property_receipts"  @if($asset->upload_image_property_receipts)  @else required @endif/>
+               @if ($agent->isMobile())
+             <br>
+              
+            <input type="file" name="take_photo_phone" id="file" class="inputfile"  accept="image/*" capture> 
+               <label for="file">Choose a Photo</label> 
+               <br>
+           @endif
               @if($asset->upload_image_property_receipts)
                 <img src="{{url('/').'/thumbnail_images/'.$asset->upload_image_property_receipts}}" style="width: 150px;height: 150px;"/>
               @endif

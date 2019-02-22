@@ -67,6 +67,7 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
+     
       $request->validate([
       //'image_url'=>'required',
       'accured_date'=>'required',
@@ -78,19 +79,33 @@ class HomeController extends Controller
       'item_location' => 'required',
       'serial_number' => 'required',
       'make_model' => 'required',
-      'upload_image_property_receipts' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
       ]);
-      $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
-        $photo = request()->upload_image_property_receipts;
+        $imageName = " ";
+        $take_photo_phone = " ";
         $destinationPath = public_path('/thumbnail_images'); 
         $destinationPath_largeimage = public_path('/large_images'); 
-        $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
-        $thumb_img->save($destinationPath.'/'.$imageName );
-        $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
-        $large_img->save($destinationPath_largeimage.'/'.$imageName );
+        if($request->has('upload_image_property_receipts')){
+          $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
+          $photo = request()->upload_image_property_receipts;
+          $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
+          $thumb_img->save($destinationPath.'/'.$imageName );
+          $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
+          $large_img->save($destinationPath_largeimage.'/'.$imageName );
+      }else{
+
+          $imageName = time().'.'.request()->take_photo_phone->getClientOriginalExtension();
+          $photo = request()->take_photo_phone;
+          $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
+          $thumb_img->save($destinationPath.'/'.$imageName );
+          $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
+          $large_img->save($destinationPath_largeimage.'/'.$imageName );
+      }
         //$destinationPath = public_path('/normal_images');
         //$photo->move($destinationPath, $imageName );
+      
       $id = \Auth::user()->id;
       $asset = new Asset([
       'user_id' => $id,
@@ -148,7 +163,20 @@ class HomeController extends Controller
       $asset->make_model = $request->input('make_model');
       $asset->notes = $request->input('notes');
       $asset->other_ownership = $request->input('other_ownership');
-       if($request->has('upload_image_property_receipts')){
+      $destinationPath = public_path('/thumbnail_images'); 
+      $destinationPath_largeimage = public_path('/large_images'); 
+      $imageName =" ";
+      if($request->has('take_photo_phone')){
+      $imageName = time().'.'.request()->take_photo_phone->getClientOriginalExtension();
+      $photo = request()->take_photo_phone;
+       $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
+        $thumb_img->save($destinationPath.'/'.$imageName );
+        $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
+        $large_img->save($destinationPath_largeimage.'/'.$imageName );
+        //request()->upload_image_property_receipts->move(public_path('images'), $imageName);
+      $asset->upload_image_property_receipts = $imageName;
+    }
+     else if($request->has('upload_image_property_receipts')){
       $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
       $photo = request()->upload_image_property_receipts;
         $destinationPath = public_path('/thumbnail_images'); 
