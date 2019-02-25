@@ -204,6 +204,17 @@ class HomeController extends Controller
     public function destroy($id)
     {
       $assets = Asset::findOrFail($id);
+      if(isset($assets->upload_image_property_receipts)){
+        $upload_image_property_receipts = $assets->upload_image_property_receipts; 
+        $destinationPath = public_path('/thumbnail_images'); 
+        $destinationPath_largeimage = public_path('/large_images');
+        if(file_exists($destinationPath.'/'.$upload_image_property_receipts)){
+          unlink($destinationPath.'/'.$upload_image_property_receipts);
+        }
+        if(file_exists($destinationPath_largeimage.'/'.$upload_image_property_receipts)){
+          unlink($destinationPath_largeimage.'/'.$upload_image_property_receipts);
+        }
+      } 
       $assets->delete();
       return redirect('/home')->with('success', 'Asset has been deleted');
     }

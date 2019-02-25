@@ -76,7 +76,7 @@
               <input type="text" class="form-control" name="make_model" placeholder="Your Answer" required value="{{ old('image_url') }}"/>
           </div>
           <div class="form-group">
-              <!<label for="quantity">Upload Image Of Property And Receipts*</label>
+              <label for="quantity">Upload Image Of Property And Receipts*</label>
               <input type="file" class="form-control form-control-files" name="upload_image_property_receipts" id="upload_image_property_receipts"  @if($agent->isDesktop()) required @endif/>
                @if ($agent->isMobile())
              <br>
