@@ -13,8 +13,11 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    //'name' => env('APP_NAME', 'Laravel'),
+     'name' => 'Divorce Inventory System',
 
+    
+    
     /*
     |--------------------------------------------------------------------------
     | Application Environment

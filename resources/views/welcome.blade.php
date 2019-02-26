@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+       <title>{{ config('app.name') }} </title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -20,20 +20,12 @@
                 margin: 0;
             }
 
-            .full-height {
-                float:left;
-                width: 100%            }
-
-           
-
-           
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
             
+
+            .content {
+               // text-align: center;
+              
+            }
 
             .title {
                 font-size: 84px;
@@ -52,81 +44,99 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-
-.main {
-  max-width: 1000px;
-  margin: auto;
+            #pageContent {
+        max-width: 1000px;
+        margin: auto;
+        border: none;
+        padding-bottom: 20px;
+        }
+        main {
+    float: left;
+    width: 100%;
+    }
+    article {
+    border-bottom: 2px dotted #999;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    }
+    #logo {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 30px;
+    width: 60%;
+    color: #FFF;
 }
+header {
+    width: 82%;
+    margin: auto;
 
-
-
-
-
-/* Create four equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 100%;
 }
-
-/* Clear floats after rows */
-
-
-
+nav {
+    display: inline-block;
+}
+nav ul {
+    list-style: none;
+}
+nav ul li {
+    display: inline-block;
+    margin: 10px;
+}
+nav ul li a{
+    color: #636b6f;
+     padding: 0 25px;
+     font-size: 13px;
+     font-weight: 600;
+     letter-spacing: .1rem;
+     text-decoration: none;
+     text-transform: uppercase;
+}
         </style>
     </head>
     <body>
-    <!--<div>
-        <img src="{{url('/').'/images/'}}thatswasmystuff_logo.png" />
-        </div>-->
-        <div class="flex-center position-ref full-height">
-        
-            @if (Route::has('login'))
-                <div class="top-right links">
+       
+        <header>
+        <div id="logo"><img src="{{url('/').'/images/'}}thatswasmystuff_logo.png" /></div>
+        <nav>  
+            <ul>
+               
+                @if (Route::has('login'))
+                
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <li><a href="{{ url('/home') }}">Home</a></li>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <li><a href="{{ route('login') }}">Login</a></li>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                           <li> <a href="{{ route('register') }}">Register</a></li>
                         @endif
                     @endauth
-                </div>
+              
             @endif
-
+            </ul>
+        </nav>
+    </header>
             <div class="content">
-                
-                <div class="main">
-
-<!-- Gallery Grid -->
-
-  <div class="column">
-    
-      <h2>Know your stuff:</h2>     
-      <p>With That was my stuff, you and your family get a unified, real-time view of stuff levels and inventory Know what you have and where you have it 
+              <section id="pageContent">
+        <main role="main">
+            <article>
+                <h2>Know your stuff:</h2>
+                <p>With That was my stuff, you and your family get a unified, real-time view of stuff levels and inventory Know what you have and where you have it 
 Give your family insight into how much you have and who owns it.</p>
-  
-  </div>
- <div class="column">
-  
-      <h2>Run a lean inventory operation:</h2>     
-      <p>Tighter inventory management in that was my stuff means better better data for lawyer and judge, saving money and time.</p>
-  
-  </div>
- <div class="column">
-   
-      <h2>Accountability for the whole family:</h2>     
+            </article>
+            <article>
+                <h2>Run a lean inventory operation:</h2>
+                <p>Tighter inventory management in that was my stuff means better better data for lawyer and judge, saving money and time.</p>
+            </article>
+            <article>
+                <h2>Accountability for the whole family:</h2>
+                <p>Accountability for the whole family:</h2>     
       <p>Maintain accountability across the family through that was my stuff history, pricing, and reports.</p>
-   
-  </div>
- <div class="column">
-  
-
-      <h2>Better, faster, easier</h2>     
-      <p>With that was my stuff inventory software, you can input your family inventory faster, and reduce manual inventory taking related tasks, helping you focus on what you need to do most.</p>
- 
-  </div>
-  <div class="links">
+            </article>
+            <article>
+                <h2>Better, faster, easier</h2>
+                <p>With that was my stuff inventory software, you can input your family inventory faster, and reduce manual inventory taking related tasks, helping you focus on what you need to do most.</p>
+            </article>
+             <div class="links">
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="8CW84WDFGGTFN">
@@ -137,10 +147,16 @@ Give your family insight into how much you have and who owns it.</p>
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
                 </div>
-  </div>
-  
+                <article>
+               &nbsp;
+            </article>
+        </main>
+        
+    </section>  
 
             </div>
-        </div>
+
+     
+        
     </body>
 </html>
