@@ -28,7 +28,9 @@
                     {{ config('app.home', 'Home') }}
                 </a>
                 @auth
-                <a href="{{ url('create') }}" class="btn btn-info" role="button">Add Asset</a>
+                <a class="navbar-brand" href="{{ url('create') }}">
+                    Add Asset
+                </a>
                 @endauth
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
