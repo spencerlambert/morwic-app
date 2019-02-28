@@ -7,7 +7,7 @@ use App\Asset;
 use DB;
 use Image;
 use Browser;
-
+use Validator;
 
 
 class HomeController extends Controller
@@ -67,26 +67,30 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-     
-      $request->validate([
-      //'image_url'=>'required',
-      'accured_date'=>'required',
-      'present_value'=> 'numeric',
-      'accured_value' => 'numeric',
-      //'ownership'=> 'required|alpha',
-      'purchased_prior_marriage'=> 'required|boolean',
-      'property_item_name' => 'required',
-      'item_location' => 'required',
-      'serial_number' => 'required',
-      'make_model' => 'required',
-      'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-       'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
-      ]);
+      $rules = [
+        'accured_date'=>'required|date',
+        'present_value'=> 'numeric|max:99999999999',
+        'accured_value' => 'numeric|max:99999999999',
+        //'ownership'=> 'required|alpha',
+        'purchased_prior_marriage'=> 'required|boolean',
+        'property_item_name' => 'required',
+        'item_location' => 'required',
+        'serial_number' => 'required',
+        'make_model' => 'required|alpha',
+        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ];
+      $customMessages = [
+        'present_value.max'    => 'The :attribute may not exceed 12 digits.',
+        'accured_value.max'    => 'The :attribute may not exceed 12 digits',
+      ];
+      // $validator = Validator::make($request->all(), $rules, $messages);
+      $this->validate($request, $rules, $customMessages);
         $imageName = " ";
         $take_photo_phone = " ";
-        $destinationPath = public_path('/thumbnail_images'); 
-        $destinationPath_largeimage = public_path('/large_images'); 
+        $destinationPath = public_path('/thumbnail_images');
+        $destinationPath_largeimage = public_path('/large_images');
         if($request->has('upload_image_property_receipts')){
           $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
           $photo = request()->upload_image_property_receipts;
@@ -105,7 +109,7 @@ class HomeController extends Controller
       }
         //$destinationPath = public_path('/normal_images');
         //$photo->move($destinationPath, $imageName );
-      
+
       $id = \Auth::user()->id;
       $asset = new Asset([
       'user_id' => $id,
@@ -137,20 +141,25 @@ class HomeController extends Controller
      */
     public function update(Request $request,$id)
     {
-     
-      $request->validate([
-      
-      'accured_date'=>'required',
-      'present_value'=> 'numeric',
-      'accured_value' => 'numeric',
-      //'ownership'=> 'required|alpha',
-      'purchased_prior_marriage'=> 'required|boolean',
-      'property_item_name' => 'required',
-      'item_location' => 'required',
-      'serial_number' => 'required',
-      'make_model' => 'required',
-      ]);
-           
+      $rules = [
+        'accured_date'=>'required|date',
+        'present_value'=> 'numeric|max:99999999999',
+        'accured_value' => 'numeric|max:99999999999',
+        //'ownership'=> 'required|alpha',
+        'purchased_prior_marriage'=> 'required|boolean',
+        'property_item_name' => 'required',
+        'item_location' => 'required',
+        'serial_number' => 'required',
+        'make_model' => 'required|alpha',
+        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ];
+      $customMessages = [
+        'present_value.max'    => 'The :attribute may not exceed 12 digits.',
+        'accured_value.max'    => 'The :attribute may not exceed 12 digits',
+      ];
+      // $validator = Validator::make($request->all(), $rules, $messages);
+      $this->validate($request, $rules, $customMessages);
       $asset = Asset::find($id);
       $asset->property_item_name = $request->input('property_item_name');
       $asset->accured_date = $request->input('accured_date');
@@ -163,8 +172,8 @@ class HomeController extends Controller
       $asset->make_model = $request->input('make_model');
       $asset->notes = $request->input('notes');
       $asset->other_ownership = $request->input('other_ownership');
-      $destinationPath = public_path('/thumbnail_images'); 
-      $destinationPath_largeimage = public_path('/large_images'); 
+      $destinationPath = public_path('/thumbnail_images');
+      $destinationPath_largeimage = public_path('/large_images');
       $imageName =" ";
       if($request->has('take_photo_phone')){
       $imageName = time().'.'.request()->take_photo_phone->getClientOriginalExtension();
@@ -179,19 +188,19 @@ class HomeController extends Controller
      else if($request->has('upload_image_property_receipts')){
       $imageName = time().'.'.request()->upload_image_property_receipts->getClientOriginalExtension();
       $photo = request()->upload_image_property_receipts;
-        $destinationPath = public_path('/thumbnail_images'); 
-        $destinationPath_largeimage = public_path('/large_images'); 
+        $destinationPath = public_path('/thumbnail_images');
+        $destinationPath_largeimage = public_path('/large_images');
         $thumb_img = Image::make($photo->getRealPath())->resize(400, 400);
         $thumb_img->save($destinationPath.'/'.$imageName );
         $large_img = Image::make($photo->getRealPath())->resize(1500, 1500);
         $large_img->save($destinationPath_largeimage.'/'.$imageName );
         //request()->upload_image_property_receipts->move(public_path('images'), $imageName);
-           
+
       $asset->upload_image_property_receipts = $imageName;
     }
-      
+
       $asset->save();
-          
+
       return redirect('/home')->with('success', 'Asset has been updated');
     }
 
@@ -205,8 +214,8 @@ class HomeController extends Controller
     {
       $assets = Asset::findOrFail($id);
       if(isset($assets->upload_image_property_receipts)){
-        $upload_image_property_receipts = $assets->upload_image_property_receipts; 
-        $destinationPath = public_path('/thumbnail_images'); 
+        $upload_image_property_receipts = $assets->upload_image_property_receipts;
+        $destinationPath = public_path('/thumbnail_images');
         $destinationPath_largeimage = public_path('/large_images');
         if(file_exists($destinationPath.'/'.$upload_image_property_receipts)){
           unlink($destinationPath.'/'.$upload_image_property_receipts);
@@ -214,11 +223,11 @@ class HomeController extends Controller
         if(file_exists($destinationPath_largeimage.'/'.$upload_image_property_receipts)){
           unlink($destinationPath_largeimage.'/'.$upload_image_property_receipts);
         }
-      } 
+      }
       $assets->delete();
       return redirect('/home')->with('success', 'Asset has been deleted');
     }
 
-    
+
 
 }

@@ -15,9 +15,13 @@ class PropertyItemNameFieldToAssetsTable extends Migration
     {
         Schema::table('assets', function (Blueprint $table) {
            $table->string("other_ownership")->nullable();
-           $table->dropColumn('image_url');
-             
-           
+           $table->string("property_item_name")->nullable();
+           $table->string("item_location")->nullable();
+           $table->string("serial_number")->nullable();
+           $table->string("make_model")->nullable();
+           $table->string("notes")->nullable();
+           $table->string("upload_image_property_receipts")->nullable();
+
         });
     }
 
