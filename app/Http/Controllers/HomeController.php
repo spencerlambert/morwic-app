@@ -33,7 +33,8 @@ class HomeController extends Controller
         $his_assets = Asset::where(['user_id'=>$id,'ownership'=> 'his'])->orderBy('id', 'Desc')->paginate(1);
         $her_assets = Asset::where(['user_id'=>$id,'ownership'=> 'her'])->orderBy('id', 'Desc')->paginate(1);
         $community_assets = Asset::where(['user_id'=>$id,'ownership'=> 'community'])->orderBy('id', 'Desc')->paginate(1);
-        return view('home',[ 'his_assets' => $his_assets, 'her_assets' => $her_assets, 'community_assets' => $community_assets]);
+        $other_assets = Asset::where(['user_id'=>$id,'ownership'=> 'other'])->orderBy('id', 'Desc')->paginate(1);
+        return view('home',[ 'his_assets' => $his_assets, 'her_assets' => $her_assets, 'community_assets' => $community_assets, 'other_assets' => $other_assets]);
     }
     /**
      * Show the form for creating a new resource.

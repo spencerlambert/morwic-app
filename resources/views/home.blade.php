@@ -102,7 +102,7 @@
 
 
             <div id="other" class="{{ $column }}">
-              <h3> Community Assests </h3>
+              <h3> Other Assests </h3>
 
               @if(isset($other_assets))
               @foreach($other_assets as $other_asset)
