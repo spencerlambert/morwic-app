@@ -4,12 +4,22 @@
 <div class="container">
     @if ($message = Session::get('success'))
       <div class="alert alert-success alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button> 
+      <button type="button" class="close" data-dismiss="alert">×</button>
       <strong>{{ $message }}</strong>
       </div>
     @endif
+    @if(isset($other_assets))
+      @php
+      $column = "col-md-3";
+      @endphp
+    @else
+      @php
+      $column = "col-md-4";
+      @endphp
+    @endif
+
     <div class="row justify-content-center">
-    <div id="His" class="col-md-4">
+    <div id="His" class="{{ $column }}">
               <h3> His Assests </h3>
            @if(isset($his_assets))
               @foreach($his_assets as $his_asset)
@@ -36,7 +46,7 @@
               @endif
             </div>
 
-            <div id="her" class="col-md-4">
+            <div id="her" class="{{ $column }}">
               <h3> Her Assests </h3>
 
               @if(isset($her_assets))
@@ -64,7 +74,7 @@
             </div>
 
 
-            <div id="community" class="col-md-4">
+            <div id="community" class="{{ $column }}">
               <h3> Community Assests </h3>
 
               @if(isset($community_assets))
@@ -87,6 +97,33 @@
               <hr>
               @endforeach
               {!! $community_assets->render() !!}
+              @endif
+            </div>
+
+
+            <div id="other" class="{{ $column }}">
+              <h3> Community Assests </h3>
+
+              @if(isset($other_assets))
+              @foreach($other_assets as $other_asset)
+              <div class="row">
+                <div class="col-md-12">
+                  <img src="{{url('/').'/thumbnail_images/'.$other_asset->upload_image_property_receipts}}" class="img-thumbnail" alt="property image thumbnail"><br>
+                  accured_date:{{$other_asset->accured_date}}<br>
+                  present_value:{{$other_asset->present_value}}<br>
+                  accured_value:{{$other_asset->accured_value}}<br>
+                  purchased_prior_marriage: @if($other_asset->purchased_prior_marriage) Yes @else No @endif<br>
+                  <a href="{{ route('edit',$other_asset->id)}}" class="btn btn-primary">Edit</a>
+                  <form action="{{ route('destroy', $other_asset->id)}}" method="post" style="float:right;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+                  </form>
+                </div>
+              </div>
+              <hr>
+              @endforeach
+              {!! $other_assets->render() !!}
               @endif
             </div>
     </div>
