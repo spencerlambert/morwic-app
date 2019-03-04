@@ -109,6 +109,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <img src="{{url('/').'/thumbnail_images/'.$other_asset->upload_image_property_receipts}}" class="img-thumbnail" alt="property image thumbnail"><br>
+                  Assest Owner:{{$other_asset->other_ownership}}<br>
                   accured_date:{{$other_asset->accured_date}}<br>
                   present_value:{{$other_asset->present_value}}<br>
                   accured_value:{{$other_asset->accured_value}}<br>
