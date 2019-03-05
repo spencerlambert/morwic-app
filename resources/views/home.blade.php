@@ -21,7 +21,7 @@
     <div class="row justify-content-center">
     <div id="His" class="{{ $column }}">
               <h3> His Assests </h3>
-           @if(isset($his_assets))
+           @if($his_assets->count())
               @foreach($his_assets as $his_asset)
               <div class="row">
                 <div class="col-md-12">
@@ -49,7 +49,7 @@
             <div id="her" class="{{ $column }}">
               <h3> Her Assests </h3>
 
-              @if(isset($her_assets))
+              @if($her_assets->count())
               @foreach($her_assets as $her_asset)
               <div class="row">
                 <div class="col-md-12">
@@ -77,7 +77,7 @@
             <div id="community" class="{{ $column }}">
               <h3> Community Assests </h3>
 
-              @if(isset($community_assets))
+              @if($community_assets->count())
               @foreach($community_assets as $community_asset)
               <div class="row">
                 <div class="col-md-12">
