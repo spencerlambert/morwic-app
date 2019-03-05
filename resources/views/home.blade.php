@@ -8,7 +8,7 @@
       <strong>{{ $message }}</strong>
       </div>
     @endif
-    @if(isset($other_assets))
+    @if($other_assets->total())
       @php
       $column = "col-md-3";
       @endphp
@@ -100,6 +100,7 @@
               @endif
             </div>
 
+            @if($other_assets->total())
 
             <div id="other" class="{{ $column }}">
               <h3> Other Assests </h3>
@@ -127,6 +128,8 @@
               {!! $other_assets->render() !!}
               @endif
             </div>
+            @endif
+
     </div>
 </div>
 @endsection
