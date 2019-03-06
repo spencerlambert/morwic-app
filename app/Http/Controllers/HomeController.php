@@ -79,8 +79,8 @@ class HomeController extends Controller
         'item_location' => 'required',
         'serial_number' => 'required',
         'make_model' => 'required|alpha',
-        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
       ];
       $customMessages = [
         'present_value.max'    => 'The :attribute may not exceed 12 digits.',
@@ -152,8 +152,8 @@ class HomeController extends Controller
         'item_location' => 'required',
         'serial_number' => 'required',
         'make_model' => 'required|alpha',
-        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
       ];
       $customMessages = [
         'present_value.max'    => 'The :attribute may not exceed 12 digits.',
