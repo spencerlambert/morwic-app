@@ -79,8 +79,8 @@ class HomeController extends Controller
         'item_location' => 'required',
         'serial_number' => 'required',
         'make_model' => 'required|alpha',
-        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        'upload_image_property_receipts' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        'take_photo_phone' => 'image|mimes:jpeg,png,jpg,gif,svg',
       ];
       $customMessages = [
         'present_value.max'    => 'The :attribute may not exceed 12 digits.',
