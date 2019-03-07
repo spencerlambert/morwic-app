@@ -85,6 +85,8 @@ class HomeController extends Controller
       $customMessages = [
         'present_value.max'    => 'The :attribute may not exceed 12 digits.',
         'accured_value.max'    => 'The :attribute may not exceed 12 digits',
+        'upload_image_property_receipts.max'    => 'The :attribute may not exceed 4 MB.',
+        'take_photo_phone.max'    => 'The :attribute may not exceed 4 MB.',
       ];
       // $validator = Validator::make($request->all(), $rules, $messages);
       $this->validate($request, $rules, $customMessages);
@@ -158,6 +160,9 @@ class HomeController extends Controller
       $customMessages = [
         'present_value.max'    => 'The :attribute may not exceed 12 digits.',
         'accured_value.max'    => 'The :attribute may not exceed 12 digits',
+        'upload_image_property_receipts.max'    => 'The :attribute may not exceed 4 MB.',
+        'take_photo_phone.max'    => 'The :attribute may not exceed 4 MB.',
+
       ];
       // $validator = Validator::make($request->all(), $rules, $messages);
       $this->validate($request, $rules, $customMessages);
